@@ -23,8 +23,8 @@ pub trait Scope {
         f(self)
     }
 
-    #[expect(unused)]
     /// Scoped with reference.
+    #[allow(unused)]
     fn with_ref<F, R>(&self, f: F) -> R
     where
         F: FnOnce(&Self) -> R,
@@ -32,8 +32,8 @@ pub trait Scope {
         f(self)
     }
 
-    #[expect(unused)]
     /// Scoped with mutable reference.
+    #[allow(unused)]
     fn with_mut<F, R>(&mut self, f: F) -> R
     where
         F: FnOnce(&mut Self) -> R,

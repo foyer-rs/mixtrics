@@ -3,6 +3,7 @@
         "prometheus",
         "prometheus-client",
         "prometheus-client_0_22",
+        "prometheus-client_0_23",
         "opentelemetry",
         "opentelemetry_0_27",
         "opentelemetry_0_26",

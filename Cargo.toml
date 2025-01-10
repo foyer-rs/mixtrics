@@ -2,6 +2,12 @@
 name = "mixtrics"
 version = "0.0.0"
 edition = "2021"
+repository = "https://github.com/foyer-rs/mixtrics"
+homepage = "https://github.com/foyer-rs/mixtrics"
+keywords = ["metric", "metrics", "prometheus", "opentelemetry", "telemetry"]
+authors = ["MrCroxx <mrcroxx@outlook.com>"]
+license = "Apache-2.0"
+readme = "README.md"
 
 [dependencies]
 itertools = "0.14"

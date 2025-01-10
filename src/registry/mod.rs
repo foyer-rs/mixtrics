@@ -19,9 +19,12 @@ pub mod noop;
 #[cfg(feature = "prometheus")]
 pub mod prometheus;
 
-/// Prometheus metrics components.
 #[cfg(feature = "prometheus-client")]
-pub use prometheus_client_0_22 as prometheus_client;
+pub use prometheus_client_0_23 as prometheus_client;
+
+/// Prometheus metrics components.
+#[cfg(feature = "prometheus-client_0_23")]
+pub mod prometheus_client_0_23;
 
 /// Prometheus metrics components.
 #[cfg(feature = "prometheus-client_0_22")]

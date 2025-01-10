@@ -17,6 +17,7 @@ opentelemetry_0_27 = { package = "opentelemetry", version = "0.27", optional = t
 parking_lot = "0.12"
 prometheus = { version = "0.13", optional = true }
 prometheus-client_0_22 = { package = "prometheus-client", version = "0.22", optional = true }
+prometheus-client_0_23 = { package = "prometheus-client", version = "0.23", optional = true }
 
 [dev-dependencies]
 
@@ -25,7 +26,8 @@ missing_docs = "warn"
 
 [features]
 prometheus = ["dep:prometheus"]
-prometheus-client = ["prometheus-client_0_22"]
+prometheus-client = ["prometheus-client_0_23"]
+prometheus-client_0_23 = ["dep:prometheus-client_0_23"]
 prometheus-client_0_22 = ["dep:prometheus-client_0_22"]
 opentelemetry = ["opentelemetry_0_27"]
 opentelemetry_0_27 = ["dep:opentelemetry_0_27"]

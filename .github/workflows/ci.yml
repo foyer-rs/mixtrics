@@ -112,7 +112,7 @@ jobs:
       - name: Run rust clippy check (stable)
         if: matrix.rust_toolchain == 'stable'
         run: |
-          cargo clippy --all-targets --features prometheus,prometheus-client_0_22,opentelemetry_0_26,opentelemetry_0_27 -- -D warnings
+          cargo clippy --all-targets --features prometheus,prometheus-client,prometheus-client_0_22,prometheus-client_0_23,opentelemetry_0_26,opentelemetry_0_27 -- -D warnings
       - if: steps.cache.outputs.cache-hit != 'true'
         uses: taiki-e/install-action@cargo-llvm-cov
       - if: steps.cache.outputs.cache-hit != 'true'
@@ -122,7 +122,7 @@ jobs:
           RUST_BACKTRACE: 1
           CI: true
         run: |
-          cargo llvm-cov --no-report nextest --features "prometheus,prometheus-client_0_22,opentelemetry_0_26,opentelemetry_0_27"
+          cargo llvm-cov --no-report nextest --features "prometheus,prometheus-client,prometheus-client_0_22,prometheus-client_0_23,opentelemetry_0_26,opentelemetry_0_27"
       - name: Generate codecov report
         run: |
           cargo llvm-cov report --lcov --output-path lcov.info
@@ -158,12 +158,12 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.toml') }}-${{ env.CACHE_KEY_SUFFIX }}-rustdoc-test
       - name: Run rustdoc test
         run: |
-          cargo test --features "prometheus,prometheus-client,prometheus-client_0_22,opentelemetry,opentelemetry_0_26,opentelemetry_0_27" --doc
+          cargo test --features "prometheus,prometheus-client,prometheus-client_0_22,prometheus-client_0_23,opentelemetry_0_26,opentelemetry_0_27" --doc
       - name: Test docs build with docs.rs
         env:
           RUSTDOCFLAGS: --cfg docsrs -D warnings
         run: |
-          cargo doc --features "prometheus,prometheus-client,prometheus-client_0_22,opentelemetry,opentelemetry_0_26,opentelemetry_0_27" --no-deps
+          cargo doc --features "prometheus,prometheus-client,prometheus-client_0_22,prometheus-client_0_23,opentelemetry_0_26,opentelemetry_0_27" --no-deps
       - name: Upload docs.rs docs as artifacts
         uses: actions/upload-artifact@v4
         with:

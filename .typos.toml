@@ -1,0 +1,8 @@
+[default.extend-words]
+# "ot" short for "OpenTelemetry"
+ot = "ot"
+
+[files]
+extend-exclude = [
+    "*.svg",
+]

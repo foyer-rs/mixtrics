@@ -1,0 +1,10 @@
+{   
+    "rust-analyzer.cargo.features": [
+        "prometheus",
+        "prometheus-client",
+        "prometheus-client_0_22",
+        "opentelemetry",
+        "opentelemetry_0_27",
+        "opentelemetry_0_26",
+    ]
+}

@@ -19,3 +19,9 @@ Currently, many libraries in Rust's metrics ecosystem are in a state of rapid de
     - [`prometheus-client`](https://crates.io/crates/prometheus-client): `0.22`, `0.23`
 - OpenTemeletry Metrics
     - [`opentelemetry`](https://crates.io/crates/opentelemetry): `0.26`, `0.27`
+
+## Roadmap
+
+- [ ] Documents and examples.
+- [ ] Other metrics backend supports.
+    - [ ] ???

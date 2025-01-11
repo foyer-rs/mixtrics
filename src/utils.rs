@@ -13,6 +13,7 @@
 // limitations under the License.
 
 /// Scoped functional programming extensions.
+#[allow(dead_code)]
 pub trait Scope {
     /// Scoped with ownership.
     fn with<F, R>(self, f: F) -> R
@@ -44,6 +45,7 @@ pub trait Scope {
 impl<T> Scope for T {}
 
 /// Helper trait for boxing.
+#[allow(dead_code)]
 pub trait Boxer {
     fn boxed(self) -> Box<Self>
     where

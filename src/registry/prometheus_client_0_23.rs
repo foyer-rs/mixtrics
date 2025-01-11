@@ -16,7 +16,7 @@ use std::{borrow::Cow, sync::Arc};
 
 use itertools::Itertools;
 use parking_lot::Mutex;
-use prometheus_client_0_22::{
+use prometheus_client_0_23::{
     encoding::{EncodeLabel, EncodeLabelSet, LabelSetEncoder},
     metrics::{
         counter::Counter as PcCounter, family::Family, gauge::Gauge as PcGauge, histogram::Histogram as PcHistogram,
@@ -211,7 +211,7 @@ impl RegistryOps for PrometheusClientMetricsRegistry {
 
 #[cfg(test)]
 mod tests {
-    use prometheus_client_0_22::encoding::text::encode;
+    use prometheus_client_0_23::encoding::text::encode;
 
     use super::*;
 

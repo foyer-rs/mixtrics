@@ -7,6 +7,7 @@ check:
 	typos
 	cargo sort -w
 	cargo fmt --all
+	cargo clippy --all-targets
 	cargo clippy --all-targets --all-features
 
 test:

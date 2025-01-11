@@ -16,3 +16,6 @@ mod utils;
 
 pub mod metrics;
 pub mod registry;
+
+#[cfg(feature = "test-utils")]
+pub mod test_utils;

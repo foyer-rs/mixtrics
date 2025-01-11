@@ -25,6 +25,7 @@ prometheus-client_0_23 = { package = "prometheus-client", version = "0.23", opti
 missing_docs = "warn"
 
 [features]
+default = []
 prometheus = ["dep:prometheus"]
 prometheus-client = ["prometheus-client_0_23"]
 prometheus-client_0_23 = ["dep:prometheus-client_0_23"]
@@ -32,6 +33,16 @@ prometheus-client_0_22 = ["dep:prometheus-client_0_22"]
 opentelemetry = ["opentelemetry_0_27"]
 opentelemetry_0_27 = ["dep:opentelemetry_0_27"]
 opentelemetry_0_26 = ["dep:opentelemetry_0_26"]
+test-utils = [
+    "prometheus",
+    "prometheus-client",
+    "prometheus-client_0_23",
+    "prometheus-client_0_22",
+    "opentelemetry",
+    "opentelemetry_0_27",
+    "opentelemetry_0_26",
+]
+full = ["test-utils"]
 
 [package.metadata.docs.rs]
 features = [

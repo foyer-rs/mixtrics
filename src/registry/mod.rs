@@ -17,26 +17,33 @@ pub mod noop;
 
 /// Prometheus metrics components.
 #[cfg(feature = "prometheus")]
+#[cfg_attr(docsrs, doc(cfg(feature = "prometheus")))]
 pub mod prometheus;
 
 #[cfg(feature = "prometheus-client")]
+#[cfg_attr(docsrs, doc(cfg(feature = "prometheus-client")))]
 pub use prometheus_client_0_23 as prometheus_client;
 
 /// Prometheus metrics components.
 #[cfg(feature = "prometheus-client_0_23")]
+#[cfg_attr(docsrs, doc(cfg(feature = "prometheus-client_0_23")))]
 pub mod prometheus_client_0_23;
 
 /// Prometheus metrics components.
 #[cfg(feature = "prometheus-client_0_22")]
+#[cfg_attr(docsrs, doc(cfg(feature = "prometheus-client_0_22")))]
 pub mod prometheus_client_0_22;
 
 #[cfg(feature = "opentelemetry")]
+#[cfg_attr(docsrs, doc(cfg(feature = "opentelemetry")))]
 pub use opentelemetry_0_27 as opentelemetry;
 
 /// OpenTelemetry metrics components.
 #[cfg(feature = "opentelemetry_0_27")]
+#[cfg_attr(docsrs, doc(cfg(feature = "opentelemetry_0_27")))]
 pub mod opentelemetry_0_27;
 
 /// OpenTelemetry metrics components.
 #[cfg(feature = "opentelemetry_0_26")]
+#[cfg_attr(docsrs, doc(cfg(feature = "opentelemetry_0_26")))]
 pub mod opentelemetry_0_26;

@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#![cfg_attr(docsrs, feature(doc_cfg))]
+
 mod utils;
 
 pub mod metrics;

@@ -25,3 +25,4 @@ Currently, many libraries in Rust's metrics ecosystem are in a state of rapid de
 - [ ] Documents and examples.
 - [ ] Other metrics backend supports.
     - [ ] ???
+- [ ] Changelog (will start since v0.1.x)

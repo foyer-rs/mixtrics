@@ -265,6 +265,15 @@ mod tests {
         let h = hv.histogram(&["l1".into(), "l2".into()]);
         h.record(114.514);
 
+        let hv = pc.register_histogram_vec_with_buckets(
+            "test_histogram_2".into(),
+            "test histogram 2".into(),
+            &["label1", "label2"],
+            vec![1.0, 10.0, 100.0],
+        );
+        let h = hv.histogram(&["l1".into(), "l2".into()]);
+        h.record(114.514);
+
         let mut text = String::new();
         encode(&mut text, &registry.lock()).unwrap();
         println!("{text}");

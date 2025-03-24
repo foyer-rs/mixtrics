@@ -106,3 +106,58 @@ pub type BoxedHistogramVec = Box<dyn HistogramVecOps>;
 
 /// Boxed generic registry.
 pub type BoxedRegistry = Box<dyn RegistryOps>;
+
+/// Helper to create buckets for histogram.
+#[derive(Debug)]
+pub struct Buckets;
+
+impl Buckets {
+    /// Linear bucket distribution.
+    ///
+    /// e.g.
+    ///
+    /// ```rust
+    /// use mixtrics::metrics::Buckets;
+    ///
+    /// assert_eq!(Buckets::linear(0.0, 1.0, 5), vec![0.0, 1.0, 2.0, 3.0, 4.0]);
+    /// ```
+    pub fn linear(start: f64, width: f64, length: usize) -> Vec<f64> {
+        std::iter::repeat(())
+            .enumerate()
+            .map(|(i, _)| start + (width * (i as f64)))
+            .take(length)
+            .collect()
+    }
+
+    /// Exponential bucket distribution.
+    ///
+    /// e.g.
+    ///
+    /// ```rust
+    /// use mixtrics::metrics::Buckets;
+    ///
+    /// assert_eq!(Buckets::exponential(1.0, 2.0, 5), vec![1.0, 2.0, 4.0, 8.0, 16.0]);
+    /// ```
+    pub fn exponential(start: f64, factor: f64, length: usize) -> Vec<f64> {
+        std::iter::repeat(())
+            .enumerate()
+            .map(|(i, _)| start * factor.powf(i as f64))
+            .take(length)
+            .collect()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_linear_buckets() {
+        assert_eq!(Buckets::linear(0.0, 1.0, 5), vec![0.0, 1.0, 2.0, 3.0, 4.0]);
+    }
+
+    #[test]
+    fn test_exponential_buckets() {
+        assert_eq!(Buckets::exponential(1.0, 2.0, 5), vec![1.0, 2.0, 4.0, 8.0, 16.0]);
+    }
+}

@@ -23,7 +23,7 @@ use itertools::Itertools;
 use parking_lot::Mutex;
 use prometheus::{
     register_histogram_vec_with_registry, register_int_counter_vec_with_registry, register_int_gauge_vec_with_registry,
-    Histogram, HistogramVec, IntCounter, IntCounterVec, IntGauge, IntGaugeVec, Registry,
+    Histogram, HistogramVec, IntCounter, IntCounterVec, IntGauge, IntGaugeVec, Registry, DEFAULT_BUCKETS,
 };
 
 use crate::{
@@ -81,7 +81,11 @@ fn get_or_register_gauge_vec(registry: &PrometheusMetricsRegistry, metadata: Met
     }
 }
 
-fn get_or_register_histogram_vec(registry: &PrometheusMetricsRegistry, metadata: Metadata) -> HistogramVec {
+fn get_or_register_histogram_vec(
+    registry: &PrometheusMetricsRegistry,
+    metadata: Metadata,
+    buckets: Vec<f64>,
+) -> HistogramVec {
     let vec = METRICS.lock().with(|mut metrics| {
         metrics
             .get_mut(registry)
@@ -90,7 +94,7 @@ fn get_or_register_histogram_vec(registry: &PrometheusMetricsRegistry, metadata:
             .or_insert_with(|| {
                 MetricVec::Histogram(
                     register_histogram_vec_with_registry! {
-                        metadata.name, metadata.desc, metadata.label_names, registry.registry
+                        metadata.name, metadata.desc, metadata.label_names, buckets, registry.registry
                     }
                     .unwrap(),
                 )
@@ -245,6 +249,26 @@ impl RegistryOps for PrometheusMetricsRegistry {
                 desc,
                 label_names,
             },
+            DEFAULT_BUCKETS.to_vec(),
+        )
+        .boxed()
+    }
+
+    fn register_histogram_vec_with_buckets(
+        &self,
+        name: Cow<'static, str>,
+        desc: Cow<'static, str>,
+        label_names: &'static [&'static str],
+        buckets: Vec<f64>,
+    ) -> BoxedHistogramVec {
+        get_or_register_histogram_vec(
+            self,
+            Metadata {
+                name,
+                desc,
+                label_names,
+            },
+            buckets,
         )
         .boxed()
     }

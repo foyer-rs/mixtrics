@@ -84,6 +84,16 @@ impl RegistryOps for NoopMetricsRegistry {
     ) -> BoxedHistogramVec {
         Box::new(NoopMetricsRegistry)
     }
+
+    fn register_histogram_vec_with_buckets(
+        &self,
+        _: Cow<'static, str>,
+        _: Cow<'static, str>,
+        _: &'static [&'static str],
+        _: Vec<f64>,
+    ) -> BoxedHistogramVec {
+        Box::new(NoopMetricsRegistry)
+    }
 }
 
 #[cfg(test)]

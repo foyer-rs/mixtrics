@@ -146,3 +146,18 @@ impl Buckets {
             .collect()
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_linear_buckets() {
+        assert_eq!(Buckets::linear(0.0, 1.0, 5), vec![0.0, 1.0, 2.0, 3.0, 4.0]);
+    }
+
+    #[test]
+    fn test_exponential_buckets() {
+        assert_eq!(Buckets::exponential(1.0, 2.0, 5), vec![1.0, 2.0, 4.0, 8.0, 16.0]);
+    }
+}

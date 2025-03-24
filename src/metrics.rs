@@ -79,6 +79,15 @@ pub trait RegistryOps: Send + Sync + 'static + Debug {
         desc: Cow<'static, str>,
         label_names: &'static [&'static str],
     ) -> BoxedHistogramVec;
+
+    /// Register a vector of histograms to the registry.
+    fn register_histogram_vec_with_buckets(
+        &self,
+        name: Cow<'static, str>,
+        desc: Cow<'static, str>,
+        label_names: &'static [&'static str],
+        buckets: Vec<f64>,
+    ) -> BoxedHistogramVec;
 }
 
 /// Boxed generic counter.

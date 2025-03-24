@@ -84,6 +84,16 @@ impl RegistryOps for NoopMetricsRegistry {
     ) -> BoxedHistogramVec {
         Box::new(NoopMetricsRegistry)
     }
+
+    fn register_histogram_vec_with_buckets(
+        &self,
+        _: Cow<'static, str>,
+        _: Cow<'static, str>,
+        _: &'static [&'static str],
+        _: Vec<f64>,
+    ) -> BoxedHistogramVec {
+        Box::new(NoopMetricsRegistry)
+    }
 }
 
 #[cfg(test)]
@@ -108,6 +118,15 @@ mod tests {
             "test_histogram_1".into(),
             "test histogram 1".into(),
             &["label1", "label2"],
+        );
+        let h = hv.histogram(&["l1".into(), "l2".into()]);
+        h.record(114.514);
+
+        let hv = noop.register_histogram_vec_with_buckets(
+            "test_histogram_2".into(),
+            "test histogram 2".into(),
+            &["label1", "label2"],
+            vec![1.0, 10.0, 100.0],
         );
         let h = hv.histogram(&["l1".into(), "l2".into()]);
         h.record(114.514);

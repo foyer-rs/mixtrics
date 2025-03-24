@@ -90,6 +90,8 @@ pub struct MetricVec {
     name: Cow<'static, str>,
     desc: Cow<'static, str>,
     label_names: &'static [&'static str],
+    /// Only valid with histograms.
+    buckets: Option<Vec<f64>>,
 }
 
 impl CounterVecOps for MetricVec {
@@ -129,11 +131,14 @@ impl GaugeVecOps for MetricVec {
 
 impl HistogramVecOps for MetricVec {
     fn histogram(&self, labels: &[Cow<'static, str>]) -> BoxedHistogram {
-        let histogram = self
+        let mut builder = self
             .meter
             .f64_histogram(self.name.clone())
-            .with_description(self.desc.clone())
-            .build();
+            .with_description(self.desc.clone());
+        if let Some(buckets) = &self.buckets {
+            builder = builder.with_boundaries(buckets.clone());
+        }
+        let histogram = builder.build();
         let labels = self
             .label_names
             .iter()
@@ -169,6 +174,7 @@ impl RegistryOps for OpenTelemetryMetricsRegistry {
             name,
             desc,
             label_names,
+            buckets: None,
         }
         .boxed()
     }
@@ -184,6 +190,7 @@ impl RegistryOps for OpenTelemetryMetricsRegistry {
             name,
             desc,
             label_names,
+            buckets: None,
         }
         .boxed()
     }
@@ -199,6 +206,24 @@ impl RegistryOps for OpenTelemetryMetricsRegistry {
             name,
             desc,
             label_names,
+            buckets: None,
+        }
+        .boxed()
+    }
+
+    fn register_histogram_vec_with_buckets(
+        &self,
+        name: Cow<'static, str>,
+        desc: Cow<'static, str>,
+        label_names: &'static [&'static str],
+        buckets: Vec<f64>,
+    ) -> BoxedHistogramVec {
+        MetricVec {
+            meter: self.meter.clone(),
+            name,
+            desc,
+            label_names,
+            buckets: Some(buckets),
         }
         .boxed()
     }
@@ -227,6 +252,15 @@ mod tests {
             "test_histogram_1".into(),
             "test histogram 1".into(),
             &["label1", "label2"],
+        );
+        let h = hv.histogram(&["l1".into(), "l2".into()]);
+        h.record(114.514);
+
+        let hv = ot.register_histogram_vec_with_buckets(
+            "test_histogram_2".into(),
+            "test histogram 2".into(),
+            &["label1", "label2"],
+            vec![1.0, 10.0, 100.0],
         );
         let h = hv.histogram(&["l1".into(), "l2".into()]);
         h.record(114.514);

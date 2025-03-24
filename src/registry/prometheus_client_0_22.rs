@@ -19,7 +19,10 @@ use parking_lot::Mutex;
 use prometheus_client_0_22::{
     encoding::{EncodeLabel, EncodeLabelSet, LabelSetEncoder},
     metrics::{
-        counter::Counter as PcCounter, family::Family, gauge::Gauge as PcGauge, histogram::Histogram as PcHistogram,
+        counter::Counter as PcCounter,
+        family::{Family, MetricConstructor},
+        gauge::Gauge as PcGauge,
+        histogram::Histogram as PcHistogram,
     },
     registry::Registry,
 };
@@ -126,7 +129,7 @@ impl GaugeVecOps for GaugeVec {
 
 #[derive(Debug)]
 struct Histogram {
-    histogram: Family<Labels, PcHistogram>,
+    histogram: Family<Labels, PcHistogram, PcHistogramBuilder>,
     labels: Labels,
 }
 
@@ -138,7 +141,7 @@ impl HistogramOps for Histogram {
 
 #[derive(Debug)]
 struct HistogramVec {
-    histogram: Family<Labels, PcHistogram>,
+    histogram: Family<Labels, PcHistogram, PcHistogramBuilder>,
     label_names: &'static [&'static str],
 }
 
@@ -201,11 +204,35 @@ impl RegistryOps for PrometheusClientMetricsRegistry {
         desc: Cow<'static, str>,
         label_names: &'static [&'static str],
     ) -> BoxedHistogramVec {
-        let histogram = Family::<Labels, PcHistogram>::new_with_constructor(|| {
-            PcHistogram::new([0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1.0, 2.5, 5.0, 10.0].into_iter())
+        let histogram = Family::<Labels, PcHistogram, PcHistogramBuilder>::new_with_constructor(PcHistogramBuilder {
+            buckets: vec![0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1.0, 2.5, 5.0, 10.0],
         });
         self.registry.lock().register(name, desc, histogram.clone());
         HistogramVec { histogram, label_names }.boxed()
+    }
+
+    fn register_histogram_vec_with_buckets(
+        &self,
+        name: Cow<'static, str>,
+        desc: Cow<'static, str>,
+        label_names: &'static [&'static str],
+        buckets: Vec<f64>,
+    ) -> BoxedHistogramVec {
+        let histogram =
+            Family::<Labels, PcHistogram, PcHistogramBuilder>::new_with_constructor(PcHistogramBuilder { buckets });
+        self.registry.lock().register(name, desc, histogram.clone());
+        HistogramVec { histogram, label_names }.boxed()
+    }
+}
+
+#[derive(Debug, Clone)]
+struct PcHistogramBuilder {
+    buckets: Vec<f64>,
+}
+
+impl MetricConstructor<PcHistogram> for PcHistogramBuilder {
+    fn new_metric(&self) -> PcHistogram {
+        PcHistogram::new(self.buckets.iter().copied())
     }
 }
 
@@ -234,6 +261,15 @@ mod tests {
             "test_histogram_1".into(),
             "test histogram 1".into(),
             &["label1", "label2"],
+        );
+        let h = hv.histogram(&["l1".into(), "l2".into()]);
+        h.record(114.514);
+
+        let hv = pc.register_histogram_vec_with_buckets(
+            "test_histogram_2".into(),
+            "test histogram 2".into(),
+            &["label1", "label2"],
+            vec![1.0, 10.0, 100.0],
         );
         let h = hv.histogram(&["l1".into(), "l2".into()]);
         h.record(114.514);

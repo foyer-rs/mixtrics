@@ -9,6 +9,7 @@ keywords = ["metric", "metrics", "prometheus", "opentelemetry", "telemetry"]
 authors = ["MrCroxx <mrcroxx@outlook.com>"]
 license = "Apache-2.0"
 readme = "README.md"
+rust-version = "1.63.0"
 
 [dependencies]
 itertools = "0.14"
@@ -23,8 +24,6 @@ prometheus-client_0_23 = { package = "prometheus-client", version = "0.23", opti
 
 [dev-dependencies]
 
-[workspace.lints.rust]
-missing_docs = "warn"
 
 [features]
 default = []

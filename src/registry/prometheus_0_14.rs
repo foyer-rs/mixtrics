@@ -21,7 +21,7 @@ use std::{
 
 use itertools::Itertools;
 use parking_lot::Mutex;
-use prometheus::{
+use prometheus_0_14::{
     register_histogram_vec_with_registry, register_int_counter_vec_with_registry, register_int_gauge_vec_with_registry,
     Histogram, HistogramVec, IntCounter, IntCounterVec, IntGauge, IntGaugeVec, Registry, DEFAULT_BUCKETS,
 };

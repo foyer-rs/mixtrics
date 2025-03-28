@@ -16,7 +16,8 @@ pub use opentelemetry_0_26;
 pub use opentelemetry_0_27;
 pub use opentelemetry_0_28;
 pub use opentelemetry_0_29;
-pub use prometheus;
+pub use prometheus_0_13;
+pub use prometheus_0_14;
 pub use prometheus_client_0_22;
 pub use prometheus_client_0_23;
 
@@ -24,10 +25,20 @@ pub use prometheus_client_0_23;
 macro_rules! test {
     ($f:expr) => {
         #[test]
-        fn test_prometheus() {
+        fn test_prometheus_0_13() {
             use $crate::{
-                metrics::BoxedRegistry, registry::prometheus::PrometheusMetricsRegistry,
-                test_utils::prometheus::Registry,
+                metrics::BoxedRegistry, registry::prometheus_0_13::PrometheusMetricsRegistry,
+                test_utils::prometheus_0_13::Registry,
+            };
+            let registry: BoxedRegistry = Box::new(PrometheusMetricsRegistry::new(Registry::new()));
+            ($f)(&registry);
+        }
+
+        #[test]
+        fn test_prometheus_0_14() {
+            use $crate::{
+                metrics::BoxedRegistry, registry::prometheus_0_14::PrometheusMetricsRegistry,
+                test_utils::prometheus_0_14::Registry,
             };
             let registry: BoxedRegistry = Box::new(PrometheusMetricsRegistry::new(Registry::new()));
             ($f)(&registry);

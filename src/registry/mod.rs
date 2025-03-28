@@ -18,35 +18,40 @@ pub mod noop;
 /// Prometheus metrics components.
 #[cfg(feature = "prometheus")]
 #[cfg_attr(docsrs, doc(cfg(feature = "prometheus")))]
-pub mod prometheus;
+pub use prometheus_0_14 as prometheus;
+
+/// Prometheus metrics components.
+#[cfg(feature = "prometheus_0_13")]
+#[cfg_attr(docsrs, doc(cfg(feature = "prometheus_0_13")))]
+pub mod prometheus_0_13;
+
+/// Prometheus metrics components.
+#[cfg(feature = "prometheus_0_14")]
+#[cfg_attr(docsrs, doc(cfg(feature = "prometheus_0_14")))]
+pub mod prometheus_0_14;
 
 #[cfg(feature = "prometheus-client")]
 #[cfg_attr(docsrs, doc(cfg(feature = "prometheus-client")))]
 pub use prometheus_client_0_23 as prometheus_client;
 
 /// Prometheus metrics components.
-#[cfg(feature = "prometheus-client_0_23")]
-#[cfg_attr(docsrs, doc(cfg(feature = "prometheus-client_0_23")))]
-pub mod prometheus_client_0_23;
-
-/// Prometheus metrics components.
 #[cfg(feature = "prometheus-client_0_22")]
 #[cfg_attr(docsrs, doc(cfg(feature = "prometheus-client_0_22")))]
 pub mod prometheus_client_0_22;
+
+/// Prometheus metrics components.
+#[cfg(feature = "prometheus-client_0_23")]
+#[cfg_attr(docsrs, doc(cfg(feature = "prometheus-client_0_23")))]
+pub mod prometheus_client_0_23;
 
 #[cfg(feature = "opentelemetry")]
 #[cfg_attr(docsrs, doc(cfg(feature = "opentelemetry")))]
 pub use opentelemetry_0_29 as opentelemetry;
 
 /// OpenTelemetry metrics components.
-#[cfg(feature = "opentelemetry_0_29")]
-#[cfg_attr(docsrs, doc(cfg(feature = "opentelemetry_0_29")))]
-pub mod opentelemetry_0_29;
-
-/// OpenTelemetry metrics components.
-#[cfg(feature = "opentelemetry_0_28")]
-#[cfg_attr(docsrs, doc(cfg(feature = "opentelemetry_0_28")))]
-pub mod opentelemetry_0_28;
+#[cfg(feature = "opentelemetry_0_26")]
+#[cfg_attr(docsrs, doc(cfg(feature = "opentelemetry_0_26")))]
+pub mod opentelemetry_0_26;
 
 /// OpenTelemetry metrics components.
 #[cfg(feature = "opentelemetry_0_27")]
@@ -54,6 +59,11 @@ pub mod opentelemetry_0_28;
 pub mod opentelemetry_0_27;
 
 /// OpenTelemetry metrics components.
-#[cfg(feature = "opentelemetry_0_26")]
-#[cfg_attr(docsrs, doc(cfg(feature = "opentelemetry_0_26")))]
-pub mod opentelemetry_0_26;
+#[cfg(feature = "opentelemetry_0_28")]
+#[cfg_attr(docsrs, doc(cfg(feature = "opentelemetry_0_28")))]
+pub mod opentelemetry_0_28;
+
+/// OpenTelemetry metrics components.
+#[cfg(feature = "opentelemetry_0_29")]
+#[cfg_attr(docsrs, doc(cfg(feature = "opentelemetry_0_29")))]
+pub mod opentelemetry_0_29;

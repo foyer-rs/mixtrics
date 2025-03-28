@@ -1,6 +1,8 @@
 {   
     "rust-analyzer.cargo.features": [
         "prometheus",
+        "prometheus_0_13",
+        "prometheus_0_14",
         "prometheus-client",
         "prometheus-client_0_22",
         "prometheus-client_0_23",

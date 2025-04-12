@@ -41,7 +41,7 @@ With ***mixtrics***, you can easily solve the problem.
 1. Add ***mixtrics*** to your lib dependencies, no need to enable any features.
 
 ```toml
-mixtrics = "0.0.6"
+mixtrics = "0.1"
 ```
 
 2. Define the metrics.
@@ -141,7 +141,7 @@ Assuming you are a user using a lib that uses ***mixtrics***.
 1. Add ***mixtrics*** to your lib dependencies with your metrics system feature enabled.
 
 ```toml
-mixtrics = { version = "0.0.6", features = ["prometheus_0_14"] }
+mixtrics = { version = "0.1", features = ["prometheus_0_14"] }
 ```
 
 2. Setup the app with the registry of your metrics system.

@@ -23,6 +23,7 @@ prometheus_0_13 = { package = "prometheus", version = "0.13", optional = true }
 prometheus_0_14 = { package = "prometheus", version = "0.14", optional = true }
 
 [dev-dependencies]
+tempfile = "3"
 
 [features]
 default = []

@@ -67,3 +67,8 @@ pub mod opentelemetry_0_28;
 #[cfg(feature = "opentelemetry_0_29")]
 #[cfg_attr(docsrs, doc(cfg(feature = "opentelemetry_0_29")))]
 pub mod opentelemetry_0_29;
+
+/// OpenTelemetry metrics components.
+#[cfg(feature = "opentelemetry_0_30")]
+#[cfg_attr(docsrs, doc(cfg(feature = "opentelemetry_0_30")))]
+pub mod opentelemetry_0_30;

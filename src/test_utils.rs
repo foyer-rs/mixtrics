@@ -21,6 +21,7 @@ pub use prometheus_0_13;
 pub use prometheus_0_14;
 pub use prometheus_client_0_22;
 pub use prometheus_client_0_23;
+pub use prometheus_client_0_24;
 
 #[macro_export]
 macro_rules! test {
@@ -68,6 +69,21 @@ macro_rules! test {
             use $crate::{
                 metrics::BoxedRegistry, registry::prometheus_client_0_23::PrometheusClientMetricsRegistry,
                 test_utils::prometheus_client_0_23::registry::Registry,
+            };
+            let registry: BoxedRegistry = Box::new(PrometheusClientMetricsRegistry::new(Arc::new(Mutex::new(
+                Registry::default(),
+            ))));
+            ($f)(&registry);
+        }
+
+        #[test]
+        fn test_prometheus_client_0_24() {
+            use std::sync::Arc;
+
+            use parking_lot::Mutex;
+            use $crate::{
+                metrics::BoxedRegistry, registry::prometheus_client_0_24::PrometheusClientMetricsRegistry,
+                test_utils::prometheus_client_0_24::registry::Registry,
             };
             let registry: BoxedRegistry = Box::new(PrometheusClientMetricsRegistry::new(Arc::new(Mutex::new(
                 Registry::default(),

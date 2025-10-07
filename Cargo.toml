@@ -25,6 +25,7 @@ features = [
     "opentelemetry_0_28",
     "opentelemetry_0_29",
     "opentelemetry_0_30",
+    "opentelemetry_0_31",
 ]
 rustdoc-args = ["--cfg", "docsrs"]
 
@@ -37,7 +38,8 @@ prometheus-client = ["prometheus-client_0_24"]
 prometheus-client_0_24 = ["dep:prometheus-client_0_24"]
 prometheus-client_0_23 = ["dep:prometheus-client_0_23"]
 prometheus-client_0_22 = ["dep:prometheus-client_0_22"]
-opentelemetry = ["opentelemetry_0_30"]
+opentelemetry = ["opentelemetry_0_31"]
+opentelemetry_0_31 = ["dep:opentelemetry_0_31"]
 opentelemetry_0_30 = ["dep:opentelemetry_0_30"]
 opentelemetry_0_29 = ["dep:opentelemetry_0_29"]
 opentelemetry_0_28 = ["dep:opentelemetry_0_28"]
@@ -57,16 +59,34 @@ test-utils = [
     "opentelemetry_0_28",
     "opentelemetry_0_29",
     "opentelemetry_0_30",
+    "opentelemetry_0_31",
 ]
 full = ["test-utils"]
 
 [dependencies]
 itertools = "0.14"
-opentelemetry_0_26 = { package = "opentelemetry", version = "0.26", default-features = false, features = ["metrics"], optional = true }
-opentelemetry_0_27 = { package = "opentelemetry", version = "0.27", default-features = false, features = ["metrics", "trace"], optional = true }
-opentelemetry_0_28 = { package = "opentelemetry", version = "0.28", default-features = false, features = ["metrics"], optional = true }
-opentelemetry_0_29 = { package = "opentelemetry", version = "0.29", default-features = false, features = ["futures", "metrics"], optional = true }
-opentelemetry_0_30 = { package = "opentelemetry", version = "0.30", default-features = false, features = ["futures", "metrics"], optional = true }
+opentelemetry_0_26 = { package = "opentelemetry", version = "0.26", default-features = false, features = [
+    "metrics",
+], optional = true }
+opentelemetry_0_27 = { package = "opentelemetry", version = "0.27", default-features = false, features = [
+    "metrics",
+    "trace",
+], optional = true }
+opentelemetry_0_28 = { package = "opentelemetry", version = "0.28", default-features = false, features = [
+    "metrics",
+], optional = true }
+opentelemetry_0_29 = { package = "opentelemetry", version = "0.29", default-features = false, features = [
+    "futures",
+    "metrics",
+], optional = true }
+opentelemetry_0_30 = { package = "opentelemetry", version = "0.30", default-features = false, features = [
+    "futures",
+    "metrics",
+], optional = true }
+opentelemetry_0_31 = { package = "opentelemetry", version = "0.31", default-features = false, features = [
+    "futures",
+    "metrics",
+], optional = true }
 parking_lot = "0.12"
 prometheus-client_0_22 = { package = "prometheus-client", version = "0.22", default-features = false, optional = true }
 prometheus-client_0_23 = { package = "prometheus-client", version = "0.23", default-features = false, optional = true }

@@ -12,7 +12,7 @@ date: 2025-04-12T12:00:00+08:00
 ## v0.2.1
 
 - Support [`prometheus-client`](https://crates.io/crates/prometheus-client) `0.24`.
-- Disable unnecessary featrues for metrics backends. The features can be enabled on the user side if needed.
+- Disable unnecessary features for metrics backends. The features can be enabled on the user side if needed.
 
 ## v0.2.0
 

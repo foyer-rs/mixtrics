@@ -51,7 +51,7 @@ pub mod prometheus_client_0_24;
 
 #[cfg(feature = "opentelemetry")]
 #[cfg_attr(docsrs, doc(cfg(feature = "opentelemetry")))]
-pub use opentelemetry_0_29 as opentelemetry;
+pub use opentelemetry_0_31 as opentelemetry;
 
 /// OpenTelemetry metrics components.
 #[cfg(feature = "opentelemetry_0_26")]

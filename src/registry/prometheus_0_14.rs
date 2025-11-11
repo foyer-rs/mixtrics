@@ -12,6 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//! Support for the `prometheus` crate version 0.14.
+//!
+//! Enable the `prometheus_0_14` feature to construct a [`PrometheusMetricsRegistry`] backed by
+//! the latest `prometheus` crate and satisfy the [`metrics`](crate::metrics) traits.
+
 use std::{
     borrow::Cow,
     collections::HashMap,

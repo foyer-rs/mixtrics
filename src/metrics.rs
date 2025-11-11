@@ -12,6 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//! Fundamental metrics traits and helpers.
+//!
+//! This module defines the backend-agnostic traits that [`mixtrics`](crate) uses to expose
+//! counters, gauges, and histograms. Backends implement these traits to provide the
+//! actual metrics wiring while keeping instrumentation code independent of the concrete
+//! metrics ecosystem.
+
 use std::{borrow::Cow, fmt::Debug};
 
 /// Counter metric operations.

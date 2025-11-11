@@ -12,6 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//! A no-op metrics backend useful for tests and benchmarks.
+//!
+//! This module provides [`NoopMetricsRegistry`](crate::registry::noop::NoopMetricsRegistry), an implementation of the [`RegistryOps`](crate::metrics::RegistryOps)
+//! trait that silently discards all metrics updates. It is handy for scenarios where you need
+//! to satisfy an instrumentation dependency without wiring a real metrics sink.
+
 use std::borrow::Cow;
 
 use crate::metrics::{

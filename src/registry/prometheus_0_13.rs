@@ -12,6 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//! Support for the `prometheus` crate version 0.13.
+//!
+//! Enable the `prometheus_0_13` feature to construct a [`PrometheusMetricsRegistry`] that
+//! plugs the [`metrics`](crate::metrics) traits into `prometheus` data structures.
+
 use std::{
     borrow::Cow,
     collections::HashMap,

@@ -202,7 +202,7 @@ mixtrics = { version = "0.1", features = ["prometheus_0_14"] }
 # }
 # #[cfg(feature = "prometheus_0_14")]
 fn main() {
-    let registry = Box::new(PrometheusMetricsRegistry::new(prometheus_0_14::Registry::new())) as _;
+    let registry = Box::new(PrometheusMetricsRegistry::new(::prometheus_0_14::Registry::new())) as _;
     let mut app = App::new(&registry);
     app.write(b"Hello, world!");
 }

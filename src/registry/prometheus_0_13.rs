@@ -14,7 +14,8 @@
 
 //! Support for the `prometheus` crate version 0.13.
 //!
-//! Enable the `prometheus_0_13` feature to construct a [`PrometheusMetricsRegistry`] that
+//! Enable the `prometheus_0_13` feature to construct a
+//! [`PrometheusMetricsRegistry`](crate::registry::prometheus_0_13::PrometheusMetricsRegistry) that
 //! plugs the [`metrics`](crate::metrics) traits into `prometheus` data structures.
 
 use std::{

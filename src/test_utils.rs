@@ -12,6 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//! Helpers for validating instrumentation against every supported backend.
+//!
+//! This module re-exports the backend-specific registries and provides the [`test!`] macro,
+//! which executes the same assertion across all configured metrics systems.
+
 pub use opentelemetry_0_26;
 pub use opentelemetry_0_27;
 pub use opentelemetry_0_28;

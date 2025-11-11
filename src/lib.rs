@@ -12,12 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#![doc = include_str!("../README.md")]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
 mod utils;
 
+/// Core metric traits and helpers shared by all backends.
 pub mod metrics;
+/// Registry adapters for the supported metrics backends.
 pub mod registry;
 
 #[cfg(feature = "test-utils")]
+#[cfg_attr(docsrs, doc(cfg(feature = "test-utils")))]
+/// Utilities that simplify testing instrumentation built with mixtrics.
 pub mod test_utils;

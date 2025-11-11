@@ -12,6 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//! Support for the `prometheus-client` crate version 0.24.
+//!
+//! Enable the `prometheus-client_0_24` feature to power the [`metrics`](crate::metrics)
+//! abstractions with the `prometheus-client` exporters.
+
 use std::{borrow::Cow, sync::Arc};
 
 use itertools::Itertools;

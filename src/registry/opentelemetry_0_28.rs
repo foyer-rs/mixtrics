@@ -12,6 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//! Support for the `opentelemetry` crate version 0.28.
+//!
+//! Enable the `opentelemetry_0_28` feature to use the [`metrics`](crate::metrics) traits with
+//! OpenTelemetry metrics exporters.
+
 use std::{
     borrow::Cow,
     sync::atomic::{AtomicU64, Ordering},

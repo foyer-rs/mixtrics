@@ -12,6 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//! Backend-specific registry implementations.
+//!
+//! The types in this module bridge the generic [`metrics`](crate::metrics) traits with concrete
+//! metrics ecosystems. Each sub-module is gated behind a cargo feature that matches the
+//! corresponding backend and version. Enable the feature that aligns with the metrics
+//! infrastructure you are integrating with and construct the registry for that backend.
+
 /// Some phantom metrics components that do nothing.
 pub mod noop;
 

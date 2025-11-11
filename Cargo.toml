@@ -10,6 +10,11 @@ authors = ["MrCroxx <mrcroxx@outlook.com>"]
 license = "Apache-2.0"
 readme = "README.md"
 
+[[example]]
+name = "basic"
+path = "examples/basic.rs"
+required-features = ["prometheus_0_14"]
+
 [package.metadata.docs.rs]
 features = [
     "prometheus",

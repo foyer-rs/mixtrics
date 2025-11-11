@@ -47,6 +47,7 @@ mixtrics = "0.1"
 2. Define the metrics.
 
 ```rust
+# use mixtrics::metrics::{BoxedCounter, BoxedHistogram};
 struct DiskMetrics {
     write_ops: BoxedCounter,
     write_duration: BoxedHistogram,
@@ -60,6 +61,16 @@ struct DiskMetrics {
 3. Add a `new()` function to setup metrics.
 
 ```rust
+# use std::borrow::Cow;
+# use mixtrics::metrics::{BoxedCounter, BoxedHistogram, BoxedRegistry};
+# struct DiskMetrics {
+#     write_ops: BoxedCounter,
+#     write_duration: BoxedHistogram,
+#     read_ops: BoxedCounter,
+#     read_duration: BoxedHistogram,
+#     sync_ops: BoxedCounter,
+#     sync_duration: BoxedHistogram,
+# }
 impl DiskMetrics {
     fn new(app: impl Into<Cow<'static, str>>, registry: &BoxedRegistry) -> Self {
         let app = app.into();
@@ -108,6 +119,38 @@ impl DiskMetrics {
 4. Record metrics in your app.
 
 ```rust
+# use std::{fs::File, io::Write, sync::Arc, time::Instant};
+# use mixtrics::metrics::{BoxedCounter, BoxedHistogram, BoxedRegistry};
+# struct DiskMetrics {
+#     write_ops: BoxedCounter,
+#     write_duration: BoxedHistogram,
+#     read_ops: BoxedCounter,
+#     read_duration: BoxedHistogram,
+#     sync_ops: BoxedCounter,
+#     sync_duration: BoxedHistogram,
+# }
+# impl DiskMetrics {
+#     fn new(app: impl Into<std::borrow::Cow<'static, str>>, registry: &BoxedRegistry) -> Self {
+#         let app = app.into();
+#         let op_total = registry.register_counter_vec("disk_op_total".into(), "disk ops".into(), &["app", "op"]);
+#         let op_duration =
+#             registry.register_histogram_vec("disk_op_duration".into(), "disk op duration".into(), &["app", "op"]);
+#         let slow_op_duration = registry.register_histogram_vec_with_buckets(
+#             "disk_slow_op_duration".into(),
+#             "disk slow op duration".into(),
+#             &["app", "op"],
+#             vec![0.001, 0.025, 0.05, 0.075, 0.1, 0.25, 0.5, 0.75, 1.0],
+#         );
+#         Self {
+#             write_ops: op_total.counter(&[app.clone(), "write".into()]),
+#             write_duration: op_duration.histogram(&[app.clone(), "write".into()]),
+#             read_ops: op_total.counter(&[app.clone(), "read".into()]),
+#             read_duration: op_duration.histogram(&[app.clone(), "read".into()]),
+#             sync_ops: op_total.counter(&[app.clone(), "sync".into()]),
+#             sync_duration: slow_op_duration.histogram(&[app.clone(), "sync".into()]),
+#         }
+#     }
+# }
 pub struct App {
     file: File,
     metrics: Arc<DiskMetrics>,
@@ -147,11 +190,24 @@ mixtrics = { version = "0.1", features = ["prometheus_0_14"] }
 2. Setup the app with the registry of your metrics system.
 
 ```rust
+# use mixtrics::metrics::BoxedRegistry;
+# #[cfg(feature = "prometheus_0_14")]
+# use mixtrics::registry::prometheus_0_14::{self, PrometheusMetricsRegistry};
+# struct App;
+# impl App {
+#     fn new(_: &BoxedRegistry) -> Self {
+#         App
+#     }
+#     fn write(&mut self, _: &[u8]) {}
+# }
+# #[cfg(feature = "prometheus_0_14")]
 fn main() {
     let registry = Box::new(PrometheusMetricsRegistry::new(prometheus_0_14::Registry::new())) as _;
     let mut app = App::new(&registry);
     app.write(b"Hello, world!");
 }
+# #[cfg(not(feature = "prometheus_0_14"))]
+# fn main() {}
 ```
 
 ALL DONE!

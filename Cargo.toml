@@ -10,11 +10,6 @@ authors = ["MrCroxx <mrcroxx@outlook.com>"]
 license = "Apache-2.0"
 readme = "README.md"
 
-[[example]]
-name = "basic"
-path = "examples/basic.rs"
-required-features = ["prometheus_0_14"]
-
 [package.metadata.docs.rs]
 features = [
     "prometheus",
@@ -101,3 +96,8 @@ prometheus_0_14 = { package = "prometheus", version = "0.14", default-features =
 
 [dev-dependencies]
 tempfile = "3"
+
+[[example]]
+name = "basic"
+path = "examples/basic.rs"
+required-features = ["prometheus_0_14"]

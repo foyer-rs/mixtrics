@@ -38,7 +38,8 @@ prometheus-client = ["prometheus-client_0_24"]
 prometheus-client_0_24 = ["dep:prometheus-client_0_24"]
 prometheus-client_0_23 = ["dep:prometheus-client_0_23"]
 prometheus-client_0_22 = ["dep:prometheus-client_0_22"]
-opentelemetry = ["opentelemetry_0_31"]
+opentelemetry = ["opentelemetry_0_32"]
+opentelemetry_0_32 = ["dep:opentelemetry_0_32"]
 opentelemetry_0_31 = ["dep:opentelemetry_0_31"]
 opentelemetry_0_30 = ["dep:opentelemetry_0_30"]
 opentelemetry_0_29 = ["dep:opentelemetry_0_29"]
@@ -60,6 +61,7 @@ test-utils = [
     "opentelemetry_0_29",
     "opentelemetry_0_30",
     "opentelemetry_0_31",
+    "opentelemetry_0_32",
 ]
 full = ["test-utils"]
 
@@ -84,6 +86,10 @@ opentelemetry_0_30 = { package = "opentelemetry", version = "0.30", default-feat
     "metrics",
 ], optional = true }
 opentelemetry_0_31 = { package = "opentelemetry", version = "0.31", default-features = false, features = [
+    "futures",
+    "metrics",
+], optional = true }
+opentelemetry_0_32 = { package = "opentelemetry", version = "0.32", default-features = false, features = [
     "futures",
     "metrics",
 ], optional = true }

@@ -9,6 +9,10 @@ date: 2025-04-12T12:00:00+08:00
 
 <!-- truncate -->
 
+## v0.2.4
+
+- Support  [`opentelemetry`](https://crates.io/crates/opentelemetry): `0.32`.
+
 ## v0.2.3
 
 - Enrich the document.

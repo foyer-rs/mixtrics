@@ -1,9 +1,0 @@
-header:
-  license:
-    spdx-id: Apache-2.0
-    copyright-owner: mixtrics Project Authors
-
-  paths:
-    - "**/*.rs"
-
-  comment: on-failure

@@ -1,0 +1,7 @@
+headerPath = "Apache-2.0.txt"
+
+includes = ['**/*.rs']
+
+[properties]
+copyrightOwner = "mixtrics Project Authors"
+inceptionYear = 2025

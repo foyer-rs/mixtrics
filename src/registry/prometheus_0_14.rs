@@ -15,7 +15,7 @@
 //! Support for the `prometheus` crate version 0.14.
 //!
 //! Enable the `prometheus_0_14` feature to construct a
-//! [`PrometheusMetricsRegistry`](crate::registry::prometheus_0_14::PrometheusMetricsRegistry) backed by
+//! [`crate::registry::prometheus_0_14::PrometheusMetricsRegistry`] backed by
 //! the latest `prometheus` crate and satisfy the [`metrics`](crate::metrics) traits.
 
 use std::{

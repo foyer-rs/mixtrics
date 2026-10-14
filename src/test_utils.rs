@@ -14,7 +14,7 @@
 
 //! Helpers for validating instrumentation against every supported backend.
 //!
-//! This module re-exports the backend-specific registries and provides the [`test!`] macro,
+//! This module re-exports the backend-specific registries and provides the [`test!`](crate::test!) macro,
 //! which executes the same assertion across all configured metrics systems.
 
 pub use opentelemetry_0_26;
@@ -24,6 +24,7 @@ pub use opentelemetry_0_29;
 pub use opentelemetry_0_30;
 pub use opentelemetry_0_31;
 pub use opentelemetry_0_32;
+pub use opentelemetry_0_33;
 pub use prometheus_0_13;
 pub use prometheus_0_14;
 pub use prometheus_client_0_22;
@@ -163,6 +164,16 @@ macro_rules! test {
             use $crate::{
                 metrics::BoxedRegistry, registry::opentelemetry_0_32::OpenTelemetryMetricsRegistry,
                 test_utils::opentelemetry_0_32::global::meter,
+            };
+            let registry: BoxedRegistry = Box::new(OpenTelemetryMetricsRegistry::new(meter("test")));
+            ($f)(&registry);
+        }
+
+        #[test]
+        fn test_opentelemetry_0_33() {
+            use $crate::{
+                metrics::BoxedRegistry, registry::opentelemetry_0_33::OpenTelemetryMetricsRegistry,
+                test_utils::opentelemetry_0_33::global::meter,
             };
             let registry: BoxedRegistry = Box::new(OpenTelemetryMetricsRegistry::new(meter("test")));
             ($f)(&registry);

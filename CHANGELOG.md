@@ -9,7 +9,7 @@ date: 2025-04-12T12:00:00+08:00
 
 <!-- truncate -->
 
-## Unreleased
+## v0.2.6
 
 - Support  [`opentelemetry`](https://crates.io/crates/opentelemetry): `0.33`.
 
